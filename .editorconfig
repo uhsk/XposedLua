@@ -1,0 +1,16 @@
+root = true
+
+[*]
+tab_width = 4
+indent_size = 4
+max_line_length = 300
+trim_trailing_whitespace = true
+ij_any_align_multiline_binary_operation = true
+ij_java_align_group_field_declarations = true
+
+[{*.gradle.kts, *.kts, *.kt}]
+ij_continuation_indent_size = 4
+ij_kotlin_align_in_columns_case_branch = true
+ij_kotlin_align_multiline_binary_operation = true
+ij_kotlin_align_multiline_extends_list = false
+ij_kotlin_field_annotation_wrap = off

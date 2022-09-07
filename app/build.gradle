@@ -1,0 +1,52 @@
+apply plugin: 'com.android.application'
+apply plugin: 'kotlin-android'
+apply plugin: 'kotlin-kapt'
+
+android {
+    compileSdk libs.versions.compileSdk.get().toInteger()
+
+    defaultConfig {
+        applicationId "io.github.uhsk.lua"
+        minSdk libs.versions.minSdk.get().toInteger()
+        targetSdk libs.versions.compileSdk.get().toInteger()
+        versionCode 1
+        versionName "1.0.0"
+        multiDexEnabled false
+        setProperty('archivesBaseName', "XposedLua-$versionName-$versionCode-" + (new Date()).format('yyyyMMdd'))
+        ndk { abiFilters "armeabi-v7a", "arm64-v8a", "x86", "x86_64" }
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_11
+        targetCompatibility JavaVersion.VERSION_11
+    }
+
+    kotlinOptions {
+        jvmTarget = '11'
+    }
+}
+
+dependencies {
+
+    // androidx
+    implementation libs.androidx.core
+    implementation libs.androidx.appcompat
+
+    // kotlin
+    implementation libs.kotlin.coroutines
+    implementation libs.kotlin.extension
+
+    // commons
+    implementation libs.common.gson
+    implementation libs.common.joor
+    compileOnly    libs.common.xposed
+
+    implementation 'org.luaj:luaj-jse:3.0.1'
+}
