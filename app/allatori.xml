@@ -43,7 +43,7 @@
     </keep-names>
 
     <property name="log-file" value="${logFile}" />
-    <property name="inner-classes" value="remove" />
+    <property name="inner-classes" value="remove" apply2class="class io.github.uhsk.lua.*"/>
     <property name="remove-toString" value="enable" />
     <property name="string-encryption" value="maximum" />
     <property name="string-encryption-version" value="v4" />

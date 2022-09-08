@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">XposedLua</string>
+    <string name="xposed_description">使用Lua写Xposed脚本</string>
 </resources>

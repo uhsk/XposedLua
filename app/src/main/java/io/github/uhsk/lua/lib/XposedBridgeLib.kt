@@ -59,6 +59,5 @@ class XposedBridgeLib : TwoArgFunction() {
             }
             return NONE
         }
-
     }
 }

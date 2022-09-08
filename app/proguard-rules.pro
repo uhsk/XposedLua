@@ -29,6 +29,8 @@
 
 -keepattributes Signature
 -keepattributes *Annotation*
+-keepattributes Exceptions
+-keepattributes InnerClasses
 
 ##########################################################################################################
 -keepclassmembers,allowobfuscation class * { @com.google.gson.annotations.SerializedName <fields>; }
@@ -40,6 +42,10 @@
 ##########################################################################################################
 -keep public class com.alibaba.android.arouter.routes.**{*;}
 -keep public class com.alibaba.android.arouter.facade.**{*;}
+
+##########################################################################################################
+-keep public class org.luaj.**{*;}
+-keep public class org.luaj.vm2.lib.Bit32Lib$*{*;}
 
 ##########################################################################################################
 -keep class * implements de.robv.android.xposed.IXposedHookLoadPackage
