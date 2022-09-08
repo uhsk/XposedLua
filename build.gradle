@@ -5,6 +5,8 @@ plugins {
     id 'org.jetbrains.kotlin.android' version '1.7.10' apply false
 }
 
+apply from: 'gradle/scripts/function.gradle'
+
 task clean(type: Delete) {
     delete rootProject.buildDir
 }

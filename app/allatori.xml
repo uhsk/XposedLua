@@ -1,0 +1,67 @@
+<config>
+    <input>
+        <dir in="${classesRoot}" out="${classesRoot}-obfuscated" />
+        <dir in="${kotlinRoot}" out="${kotlinRoot}-obfuscated" />
+    </input>
+
+    <classpath>
+        <jar name="${androidJar}" />
+        <jar name="${classpathJars}" />
+    </classpath>
+
+    <keep-names>
+        <class access="protected+">
+            <field access="protected+" />
+            <method access="protected+" />
+        </class>
+        <class template="public class * instanceof android.app.Activity">
+            <method template="public void *(android.view.View)" />
+        </class>
+        <class template="public class * instanceof android.view.View">
+            <method template="void set*(**)" />
+            <method template="get*()" />
+        </class>
+        <class template="class * extends java.lang.Enum">
+            <method template="values()" />
+            <method template="valueOf(java.lang.String)" />
+        </class>
+        <class template="class * implements android.os.Parcelable">
+            <field template="public static final android.os.Parcelable*Creator *" />
+        </class>
+        <class template="class *.R*">
+            <field template="public static *" />
+        </class>
+        <class template="public class * instanceof android.app.Application" />
+        <class template="public class * instanceof android.app.Service" />
+        <class template="public class * instanceof android.content.BroadcastReceiver" />
+        <class template="public class * instanceof android.content.ContentProvider" />
+        <class template="public class * instanceof android.app.backup.BackupAgentHelper" />
+        <class template="public class * instanceof android.preference.Preference" />
+        <class template="public class com.android.vending.licensing.ILicensingService" />
+        <class template="public class com.google.android.vending.licensing.ILicensingService" />
+        <class template="public class * implements de.robv.android.xposed.IXposedHookLoadPackage" />
+    </keep-names>
+
+    <property name="log-file" value="${logFile}" />
+    <property name="inner-classes" value="remove" />
+    <property name="remove-toString" value="enable" />
+    <property name="string-encryption" value="maximum" />
+    <property name="string-encryption-version" value="v4" />
+    <property name="extensive-flow-obfuscation" value="maximum" />
+    <property name="update-resource-contents" value="enable:UTF-8"/>
+    <watermark key="secure-key-to-extract-watermark" value="Author: Sollyu" />
+
+    <property name="remove-calls" value="kotlin.jvm.internal.Intrinsics.throwUninitializedPropertyAccessException" />
+    <property name="remove-calls" value="kotlin.jvm.internal.Intrinsics.checkExpressionValueIsNotNull" />
+    <property name="remove-calls" value="kotlin.jvm.internal.Intrinsics.checkFieldIsNotNull" />
+    <property name="remove-calls" value="kotlin.jvm.internal.Intrinsics.checkNotNull" />
+    <property name="remove-calls" value="kotlin.jvm.internal.Intrinsics.checkNotNullExpressionValue" />
+    <property name="remove-calls" value="kotlin.jvm.internal.Intrinsics.checkNotNullParameter" />
+    <property name="remove-calls" value="kotlin.jvm.internal.Intrinsics.checkParameterIsNotNull" />
+    <property name="remove-calls" value="kotlin.jvm.internal.Intrinsics.checkReturnedValueIsNotNull" />
+    <property name="remove-calls" value="kotlin.jvm.internal.Intrinsics.throwUninitializedPropertyAccessException" />
+    <property name="remove-calls" value="org.slf4j.Logger.trace" />
+    <property name="remove-calls" value="org.slf4j.Logger.debug" />
+    <property name="remove-calls" value="org.slf4j.Logger.info" />
+    <property name="remove-calls" value="org.slf4j.Logger.isDebugEnabled" />
+</config>

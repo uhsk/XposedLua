@@ -1,6 +1,7 @@
 apply plugin: 'com.android.application'
 apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-kapt'
+apply from: "$rootDir/gradle/scripts/allatori.gradle"
 
 android {
     compileSdk libs.versions.compileSdk.get().toInteger()
@@ -17,9 +18,19 @@ android {
     }
 
     buildTypes {
-        release {
-            minifyEnabled false
+        debug {
+            debuggable true
+            minifyEnabled getPropertiesBuildProguard()
+            shrinkResources getPropertiesBuildProguard()
+            zipAlignEnabled getPropertiesBuildProguard()
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+        release {
+            debuggable false
+            minifyEnabled true
+            shrinkResources true
+            zipAlignEnabled true
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro', 'proguard-log.pro'
         }
     }
 
@@ -31,6 +42,14 @@ android {
     kotlinOptions {
         jvmTarget = '11'
     }
+
+    applicationVariants.all { variant ->
+        variant.javaCompileProvider.get().doLast {
+            if (getPropertiesBuildAllatori())
+                runAllatori(variant)
+        }
+    }
+
 }
 
 dependencies {

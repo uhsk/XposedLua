@@ -19,3 +19,27 @@
 # If you keep the line number information, uncomment this to
 # hide the original source file name.
 #-renamesourcefileattribute SourceFile
+-obfuscationdictionary          proguard-dic-6.txt
+-renamesourcefileattribute      proguard-dic-6.txt
+-classobfuscationdictionary     proguard-dic-6.txt
+-packageobfuscationdictionary   proguard-dic-6.txt
+-repackageclasses               java.io
+-renamesourcefileattribute      "lua"
+-dontwarn **
+
+-keepattributes Signature
+-keepattributes *Annotation*
+
+##########################################################################################################
+-keepclassmembers,allowobfuscation class * { @com.google.gson.annotations.SerializedName <fields>; }
+
+##########################################################################################################
+-keep class androidx.fragment.app.FragmentTransaction{ *; }
+-keep class androidx.fragment.app.FragmentTransaction$Op{ *; }
+
+##########################################################################################################
+-keep public class com.alibaba.android.arouter.routes.**{*;}
+-keep public class com.alibaba.android.arouter.facade.**{*;}
+
+##########################################################################################################
+-keep class * implements de.robv.android.xposed.IXposedHookLoadPackage

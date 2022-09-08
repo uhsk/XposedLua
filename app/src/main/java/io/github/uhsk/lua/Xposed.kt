@@ -1,10 +1,7 @@
 package io.github.uhsk.lua
 
 import android.annotation.SuppressLint
-import android.app.Application
 import de.robv.android.xposed.IXposedHookLoadPackage
-import de.robv.android.xposed.XC_MethodHook
-import de.robv.android.xposed.XC_MethodReplacement
 import de.robv.android.xposed.callbacks.XC_LoadPackage
 import io.github.uhsk.kit.toFile
 import io.github.uhsk.lua.lib.XposedBridgeLib
