@@ -1,0 +1,39 @@
+[versions]
+compileSdk  = '31'
+minSdk      = '21'
+
+[libraries]
+#
+# androidx & kotlin
+#
+androidx-core       = 'androidx.core:core-ktx:1.7.0'
+androidx-appcompat  = 'androidx.appcompat:appcompat:1.4.1'
+kotlin-coroutines   = 'org.jetbrains.kotlinx:kotlinx-coroutines-android:1.6.0'
+kotlin-extension    = 'com.github.uhsk:kotlin-android-extension:develop-SNAPSHOT'
+
+#
+# slf4j
+#
+slf4j-api       = 'org.slf4j:slf4j-api:1.7.32'
+slf4j-logback   = 'com.github.tony19:logback-android:2.0.0'
+
+#
+# koin
+#
+koin-android = 'io.insert-koin:koin-android:3.2.0'
+koin-compat  = 'io.insert-koin:koin-android-compat:3.2.0'
+
+#
+# commons
+#
+common-lua      = 'com.wind.xposed:xposed-api-lib:0.1.3'
+common-gson     = 'com.google.code.gson:gson:2.8.6'
+common-guava    = 'com.google.guava:guava:30.1.1-android'
+common-joor     = 'org.jooq:joor-java-8:0.9.13'                                 # https://github.com/jOOQ/jOOR
+common-xposed   = 'com.wind.xposed:xposed-api-lib:0.1.3'
+
+
+
+[bundles]
+slf4j   = ['slf4j-api', 'slf4j-logback']
+koin    = ['koin-android', 'koin-compat']
