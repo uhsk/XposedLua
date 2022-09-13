@@ -1,7 +1,24 @@
+/*
+ * Copyright (C) 2022. sollyu
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *         http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ *
+ *
+ */
+
 apply plugin: 'com.android.application'
 apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-kapt'
-apply from: "$rootDir/gradle/scripts/allatori.gradle"
 
 android {
     compileSdk libs.versions.compileSdk.get().toInteger()
@@ -14,23 +31,22 @@ android {
         versionName "1.0.0"
         multiDexEnabled false
         setProperty('archivesBaseName', "XposedLua-$versionName-$versionCode-" + (new Date()).format('yyyyMMdd'))
-        ndk { abiFilters "armeabi-v7a", "arm64-v8a", "x86", "x86_64" }
     }
 
     buildTypes {
         debug {
             debuggable true
-            minifyEnabled getPropertiesBuildProguard()
-            shrinkResources getPropertiesBuildProguard()
-            zipAlignEnabled getPropertiesBuildProguard()
+            minifyEnabled false
+            shrinkResources false
+            zipAlignEnabled false
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
         release {
             debuggable false
-            minifyEnabled true
-            shrinkResources true
-            zipAlignEnabled true
-            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro', 'proguard-log.pro'
+            minifyEnabled false
+            shrinkResources false
+            zipAlignEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
     }
 
@@ -43,13 +59,13 @@ android {
         jvmTarget = '11'
     }
 
-    applicationVariants.all { variant ->
-        variant.javaCompileProvider.get().doLast {
-            if (getPropertiesBuildAllatori())
-                runAllatori(variant)
-        }
+    packagingOptions {
+        exclude 'kotlin-tooling-metadata.json'
+        exclude 'DebugProbesKt.bin'
+        exclude '/kotlin/**.kotlin_builtins'
+        exclude '/org/apache/commons/codec/**/'
+        exclude '/META-INF/**.version'
     }
-
 }
 
 dependencies {
