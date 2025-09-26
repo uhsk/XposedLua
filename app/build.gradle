@@ -21,14 +21,15 @@ apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-kapt'
 
 android {
-    compileSdk libs.versions.compileSdk.get().toInteger()
+    namespace  "io.github.uhsk.lua"
+    compileSdk libs.versions.compile.get().toInteger()
 
     defaultConfig {
         applicationId "io.github.uhsk.lua"
         minSdk libs.versions.minSdk.get().toInteger()
-        targetSdk libs.versions.compileSdk.get().toInteger()
-        versionCode 1
-        versionName "1.0.0"
+        targetSdk libs.versions.compile.get().toInteger()
+        versionCode 2
+        versionName "1.0.1"
         multiDexEnabled false
         setProperty('archivesBaseName', "XposedLua-$versionName-$versionCode-" + (new Date()).format('yyyyMMdd'))
     }
@@ -38,25 +39,23 @@ android {
             debuggable true
             minifyEnabled false
             shrinkResources false
-            zipAlignEnabled false
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
         release {
             debuggable false
             minifyEnabled false
             shrinkResources false
-            zipAlignEnabled false
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
     }
 
     compileOptions {
-        sourceCompatibility JavaVersion.VERSION_11
-        targetCompatibility JavaVersion.VERSION_11
+        sourceCompatibility JavaVersion.VERSION_17
+        targetCompatibility JavaVersion.VERSION_17
     }
 
     kotlinOptions {
-        jvmTarget = '11'
+        jvmTarget = '17'
     }
 
     packagingOptions {
@@ -79,9 +78,9 @@ dependencies {
     implementation libs.kotlin.extension
 
     // commons
+    implementation libs.common.lua
     implementation libs.common.gson
     implementation libs.common.joor
     compileOnly    libs.common.xposed
 
-    implementation 'org.luaj:luaj-jse:3.0.1'
 }
